@@ -92,9 +92,9 @@ for i in range(100):
 	id_ = index[inf[i][1]]
 	# print inf[i], id_, sum(w1[id_]) 
 	print inf[i],
-	print "	"+str(id_)+"	"+ str(200*sum(w1[id_]) ) 
+	print "	"+str(id_)+"	"+ str(sum(w1[id_])) 
 
 
-f = open('influence.p', 'w')
-cPickle.dump(I, f)
-f.close()
+# f = open('influence.p', 'w')
+# cPickle.dump(I, f)
+# f.close()

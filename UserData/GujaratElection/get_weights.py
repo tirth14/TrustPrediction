@@ -25,17 +25,21 @@ for i in range(n):
 	tweets = cPickle.load(f)
 	f.close()
 	for tweet in tweets:
+		# hashtags = [x['text'].lower() for x in tweet.entities['hashtags']]
+		# if not any(['election'.lower() in x for x in hashtags]):
+		# 	continue
+		# print tweet.id
 		count_tweet[i] += 1 # can make it constrained in a time period
 		if hasattr(tweet,'retweeted_status'):
 			parent = tweet.retweeted_status.user.screen_name
 			if parent in index:
 				j = index[parent]
-				count_retweet[i][j] += 1
+				count_retweet[j][i] += 1
 		elif hasattr(tweet,'quoted_status'):
 			parent = tweet.quoted_status['user']['screen_name']
 			if parent in index:
 				j = index[parent]
-				count_retweet[i][j] += 1
+				count_retweet[j][i] += 1
 	print i
 
 w = [[0.0 for j in range(n)] for i in range(n)]
@@ -44,6 +48,6 @@ for i in range(n):
 		w[i] = [float(count_retweet[i][j])/count_tweet[i] for j in range(n)]
 		# print sum(count_retweet[i]), sum(w[i])
 
-f = open('weights.p','w')
-cPickle.dump(w,f)
-f.close()
+# f = open('weights.p','w')
+# cPickle.dump(w,f)
+# f.close()
